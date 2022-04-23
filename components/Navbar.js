@@ -9,6 +9,7 @@ import HomeScreen from '../screens/Home';
 import SettingsScreen from '../screens/SettingsScreen';
 import PhScreen from '../screens/PhScreen'; 
 import Temperature from '../screens/TempScreen';
+import WaterChange from "../screens/WaterChange";
 
 const Tab = createBottomTabNavigator();
 
@@ -36,6 +37,9 @@ export default function Navbar() {
             else if (route.name === "Temperature"){
               iconName = focused ? 'flame':'flame-outline'
             }
+            else if(route.name == 'Water'){
+              iconName = focused ? 'water': 'water-outline'
+            }
 
             // You can return any component that you like here!
             //<Ionicons name="ios-eyedrop" size={24} color="black" />
@@ -48,6 +52,7 @@ export default function Navbar() {
         <Tab.Screen name="Home" component={HomeScreen} />
         <Tab.Screen name="PH" component={PhScreen} />
         <Tab.Screen name="Temperature" component={Temperature} />
+        <Tab.Screen name="Water" component={WaterChange} />
         <Tab.Screen name="Settings" component={SettingsScreen} />
       </Tab.Navigator>
     </NavigationContainer>

@@ -1,6 +1,6 @@
 import React,{useState, useEffect} from 'react';
 import 'react-native-gesture-handler'
-import { NativeBaseProvider, Box, Flex, Spacer, Divider, Text, Button, Icon, Alert, Center } from 'native-base';
+import { NativeBaseProvider, Box, Flex, Spacer, Divider, Text, Button, Icon, Pressable, Center } from 'native-base';
 
 import {db, mydb} from '../firebase'
 
@@ -36,7 +36,7 @@ function HomeScreen({ navigation }){
       }, []);
     
     return(
-        <NativeBaseProvider>
+
             <Box safeArea flex="1" flexDirection="column" justifyContent="space-evenly">
                 <Box p={10} py={8}>
                         <Text fontSize="lg" bold>Today</Text>
@@ -45,16 +45,20 @@ function HomeScreen({ navigation }){
                 </Box>
                 <Flex mb={2} direction="row"  justifyContent="space-evenly">
 
-                        <Button px={10} py={10} rounded="lg" bg="gray.100" shadow={8} onPress={() => navigation.navigate('PH')}>
+                    
+    
+                         <Button px={10} py={10} rounded="lg" bg="gray.100" shadow={8} onPress={() => navigation.navigate('PH')}>
                             <Flex direction='row' bottom={6}>
                                 <Icon as={Fontisto} name="blood-test" size={6} color="black" />
                                 <Text px={2} fontSize="lg" color="black">pH</Text> 
                             </Flex>
                             <Text alignContent="center" fontSize="2xl">80</Text> 
-                            </Button>
+                        </Button>
 
-                        
-                            <Button px={12} py={10} rounded="lg" bg="gray.100" shadow={8} onPress={() => navigation.navigate('Temperature')}>
+                       
+
+
+                        <Button px={12} py={10} rounded="lg" bg="gray.100" shadow={8} onPress={() => navigation.navigate('Temperature')}>
                             <Flex direction='row' bottom={6}>
                                 <FontAwesome5 name="temperature-low" size={20} color="black" />
                                 <Text fontSize="xs" ml={2}>o</Text>
@@ -63,6 +67,8 @@ function HomeScreen({ navigation }){
                             </Flex>
                                <Text fontSize="2xl">80</Text> 
                             </Button>
+
+                            
                 </Flex>
                 <Box bg="gray.100" py={8} mx={8} justifyContent="center" shadow={8}>
                    <Center>
@@ -71,7 +77,7 @@ function HomeScreen({ navigation }){
                    </Center>
                 </Box>
             </Box>
-        </NativeBaseProvider>
+
 )}
 
 export default HomeScreen;

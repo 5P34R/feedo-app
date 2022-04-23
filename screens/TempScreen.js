@@ -9,7 +9,7 @@ const Temperature = ({ navigation }) => {
     const [tasks, setTasks] = useState([]);
 
     useEffect(() => {
-        db.collection('tasks')
+        db.collection('pH')
         .get()
         .then(result => result.docs)
         .then(docs => docs.map( doc => ({
