@@ -30,8 +30,11 @@ const Temperature = ({ navigation }) => {
       doc => ({
         id: doc.id,
         value: doc.data().value,
-        time: epochToTime(doc.data().myTimestamp?.seconds).time,
-        date: epochToTime(doc.data().MyTimestamp?.seconds).date,
+        time : epochToTime(doc.data().myMap.name).time,
+        date : epochToTime(doc.data().myMap.name).date
+        // timestamp: doc.data().myMap?.name
+        // time: epochToTime(doc.data().MyMap?.name).time,
+        // date: epochToTime(doc.data().MyMap?.name).date,
       })
     ))
     .then(res => setTemp(res))
@@ -44,8 +47,8 @@ const Temperature = ({ navigation }) => {
           docSnapshot => ({
             id:docSnapshot.id,
             value: docSnapshot.data().value,
-            time : epochToTime(docSnapshot.data().MyTimestamp?.seconds).time,
-            //date: epochToTime(docSnapshot.data().MyTimestamp?.seconds).date
+            time : epochToTime(docSnapshot.data().myMap.name).time,
+            date: epochToTime(docSnapshot.data().myMap.name).date
           })
         )
           setTemp(res)
@@ -75,7 +78,7 @@ const Temperature = ({ navigation }) => {
             data={temp}
             renderItem={({
               item
-            }) => <LogBox type="temp" value={item.value} time={item.time}/>
+            }) => <LogBox type="temp" date={item.date} value={item.value} time={item.time}/>
           
           } keyExtractor={item => item.id}
             />

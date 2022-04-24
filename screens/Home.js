@@ -4,13 +4,9 @@ import { NativeBaseProvider, Box, Flex, Spacer, Divider, Text, Button, Icon, Pre
 
 import {db, getDoc, doc} from '../firebase'
 
-
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { Fontisto } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
-import { Entypo } from '@expo/vector-icons';
-import { getDrawerStatusFromState } from '@react-navigation/drawer';
 
 function HomeScreen({ navigation }){
 
@@ -23,7 +19,7 @@ function HomeScreen({ navigation }){
         .then(snapshot => {
             setfData(snapshot.docs[0].data())
         })
-        console.log(fdata)
+        console.log(fdata.date.seconds)
     }
 
 
@@ -35,13 +31,14 @@ function HomeScreen({ navigation }){
     
         //Alert.alert(date + '-' + month + '-' + year);
         // You can turn it in to your desired format
-        let time =  date + ' ' + month + ' ' + year;//format: dd-mm-yyyy;
+        let time =  date + '-' + month + '-' + year;//format: dd-mm-yyyy;
         setData(time)
+        // getWaterData()
     }
 
     useEffect(() => {
         getCurrentDate();
-        getWaterData()
+        // getWaterData();
         // getData();
       }, []);
     
@@ -54,9 +51,7 @@ function HomeScreen({ navigation }){
                 </Box>
                 <Flex mb={2} direction="row"  justifyContent="space-evenly">
 
-                    
-    
-                         <Button px={10} py={10} rounded="lg" bg="gray.100" shadow={8} onPress={() => navigation.navigate('PH')}>
+                  <Button px={10} py={10} rounded="lg" bg="gray.100" shadow={8} onPress={() => navigation.navigate('PH')}>
                             <Flex direction='row' bottom={6}>
                                 <Icon as={Fontisto} name="blood-test" size={6} color="black" />
                                 <Text px={2} fontSize="lg" color="black">pH</Text> 
@@ -80,7 +75,9 @@ function HomeScreen({ navigation }){
                 <Button onPress={() => navigation.navigate("Water")} bg="gray.100" py={8} mx={8} justifyContent="center" shadow={8}>
                    <Center>
                     <Text fontSize="md">Last Water Change</Text>
-                       <Text fontWeight="bold">{data}</Text>
+                       <Text fontWeight="bold">{
+                           data
+                       }</Text>
                    </Center>
                 </Button>
             </Box>

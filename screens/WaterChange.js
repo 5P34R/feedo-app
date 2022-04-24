@@ -112,7 +112,7 @@ const WaterChange = ({ navigation }) => {
         <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
         <Modal.Content maxWidth="400px">
           <Modal.CloseButton />
-          <Modal.Header>Contact Us</Modal.Header>
+          <Modal.Header>Select</Modal.Header>
           <Modal.Body>
           <Button onPress={showDatepicker} bg="gray.100"><Text>Show date picker!</Text></Button>
           <Button onPress={showTimepicker} bg="gray.100"><Text>Show time picker!</Text></Button>
