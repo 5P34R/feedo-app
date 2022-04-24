@@ -21,8 +21,7 @@ const PhScreen = ({ navigation }) => {
     }
   }
 
-
-  useEffect(() => {
+  function getPH(){
     db.collection('pH')
     .get()
     .then(result => result.docs)
@@ -33,12 +32,29 @@ const PhScreen = ({ navigation }) => {
         time: epochToTime(doc.data().createdAt.seconds).time,
         date: epochToTime(doc.data().createdAt.seconds).date
       })
-     
     ))
     .then(res => setPHs(res))
-}
-,[])
+  }
 
+  useEffect(() => {
+    db.collection('pH').onSnapshot({
+      next: querySnapshot => {
+        const res = querySnapshot.docs.map(
+          docSnapshot => ({
+            id:docSnapshot.id,
+            value: docSnapshot.data().value,
+            time : epochToTime(docSnapshot.data().createdAt.seconds).time,
+            date: epochToTime(docSnapshot.data().createdAt).date
+          })
+        )
+          setPHs(res)
+      },
+      error: (error) => console.log(error)
+    })
+
+    getPH()
+    }
+    ,[setPHs])
       return (
       <Box safeArea>
         <HStack p={4}>
@@ -58,7 +74,7 @@ const PhScreen = ({ navigation }) => {
             data={pHs}
             renderItem={({
               item
-            }) => <LogBox date={item.date} value={item.value} time={item.time}/>
+            }) => <LogBox type="pH" date={item.date} value={item.value} time={item.time}/>
           
           } keyExtractor={item => item.id}
             />

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Box, VStack, HStack, Text, Center} from 'native-base'
+import {Box, VStack, HStack, Text, Center, Flex} from 'native-base'
 
 
 
@@ -20,7 +20,10 @@ const LogBox = (props) => {
                       <Text color="coolGray.600" _dark={{
                   color: "warmGray.200"
                 }}>
-                        ph :{props.value}
+                  
+                    {props.type}: {props.value}
+                  
+                        
                       </Text>
                       </Center>
                     </VStack>

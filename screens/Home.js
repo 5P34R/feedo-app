@@ -2,7 +2,7 @@ import React,{useState, useEffect} from 'react';
 import 'react-native-gesture-handler'
 import { NativeBaseProvider, Box, Flex, Spacer, Divider, Text, Button, Icon, Pressable, Center } from 'native-base';
 
-import {db, mydb} from '../firebase'
+import {db, getDoc, doc} from '../firebase'
 
 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -16,6 +16,15 @@ function HomeScreen({ navigation }){
 
     const [data, setData] = useState('')
     const [fdata, setfData] = useState('')
+
+
+    const getWaterData = () => {
+        db.collection("Water").get()
+        .then(snapshot => {
+            setfData(snapshot.docs[0].data())
+        })
+        console.log(fdata)
+    }
 
 
     const getCurrentDate = ()=> {
@@ -32,6 +41,7 @@ function HomeScreen({ navigation }){
 
     useEffect(() => {
         getCurrentDate();
+        getWaterData()
         // getData();
       }, []);
     
@@ -40,7 +50,6 @@ function HomeScreen({ navigation }){
             <Box safeArea flex="1" flexDirection="column" justifyContent="space-evenly">
                 <Box p={10} py={8}>
                         <Text fontSize="lg" bold>Today</Text>
-                        <Text fontSize="lg" bold>{fdata}</Text>
                         <Text fontSize="md" italic>{data}</Text>
                 </Box>
                 <Flex mb={2} direction="row"  justifyContent="space-evenly">
@@ -55,8 +64,6 @@ function HomeScreen({ navigation }){
                             <Text alignContent="center" fontSize="2xl">80</Text> 
                         </Button>
 
-                       
-
 
                         <Button px={12} py={10} rounded="lg" bg="gray.100" shadow={8} onPress={() => navigation.navigate('Temperature')}>
                             <Flex direction='row' bottom={6}>
@@ -70,12 +77,12 @@ function HomeScreen({ navigation }){
 
                             
                 </Flex>
-                <Box bg="gray.100" py={8} mx={8} justifyContent="center" shadow={8}>
+                <Button onPress={() => navigation.navigate("Water")} bg="gray.100" py={8} mx={8} justifyContent="center" shadow={8}>
                    <Center>
                     <Text fontSize="md">Last Water Change</Text>
                        <Text fontWeight="bold">{data}</Text>
                    </Center>
-                </Box>
+                </Button>
             </Box>
 
 )}
